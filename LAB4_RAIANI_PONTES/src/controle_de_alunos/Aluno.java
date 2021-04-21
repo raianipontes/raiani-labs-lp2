@@ -27,12 +27,12 @@ public class Aluno {
 	 * @param curso Curso do aluno.
 	 */
 	public Aluno(String matricula, String nome, String curso) {
-		Verificador.verificaMatriculaNull(matricula);
-		Verificador.verificaNomeNull(nome);
-		Verificador.verificaCursoNull(curso);
-		Verificador.verificaMatriculaVazio(matricula);
-		Verificador.verificaNomeVazio(nome);
-		Verificador.verificaCursoVazio(curso);
+		Verificador.verificaNull(matricula);
+		Verificador.verificaNull(nome);
+		Verificador.verificaNull(curso);
+		Verificador.verificaVazio(matricula);
+		Verificador.verificaVazio(nome);
+		Verificador.verificaVazio(curso);
 		this.matricula = matricula;
 		this.nome = nome;
 		this.curso = curso;
@@ -51,5 +51,36 @@ public class Aluno {
 	 */
 	public String toString() {
 		return this.matricula + " - " + this.nome + " - " + this.curso;
+	}
+	
+	/**
+	 * hashCode da matrícula do aluno.
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((matricula == null) ? 0 : matricula.hashCode());
+		return result;
+	}
+	
+	/**
+	 * Comparando a matrícula, verifica se um aluno é igual ao outro, 
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Aluno other = (Aluno) obj;
+		if (matricula == null) {
+			if (other.matricula != null)
+				return false;
+		} else if (!matricula.equals(other.matricula))
+			return false;
+		return true;
 	}
 }

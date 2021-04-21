@@ -41,12 +41,12 @@ public class Controlador {
 	 * @return um valor booleano se foi possível cadastrá-lo ou não.
 	 */
 	public boolean cadastraAluno(String matricula, String nome, String curso) {
-		Verificador.verificaMatriculaNull(matricula);
-		Verificador.verificaNomeNull(nome);
-		Verificador.verificaCursoNull(curso);
-		Verificador.verificaMatriculaVazio(matricula);
-		Verificador.verificaNomeVazio(nome);
-		Verificador.verificaCursoVazio(curso);
+		Verificador.verificaNull(matricula);
+		Verificador.verificaNull(nome);
+		Verificador.verificaNull(curso);
+		Verificador.verificaVazio(matricula);
+		Verificador.verificaVazio(nome);
+		Verificador.verificaVazio(curso);
 		if (existeAluno(matricula)) {
 			return false;
 		}
@@ -61,8 +61,8 @@ public class Controlador {
 	 * @return A representação textual do aluno, caso ele exista.
 	 */
 	public String consultaAluno(String matricula) {
-		Verificador.verificaMatriculaNull(matricula);
-		Verificador.verificaMatriculaVazio(matricula);
+		Verificador.verificaNull(matricula);
+		Verificador.verificaVazio(matricula);
 		if (!existeAluno(matricula)) {
 			return "Aluno não cadastrado.";
 		}
@@ -76,10 +76,9 @@ public class Controlador {
 	 * @return um valor booleano se foi possível cadastrá-lo ou não.
 	 */
 	public boolean cadastraGrupo(String nome, String restricao) {
-		Verificador.verificaNomeNull(nome);
-		Verificador.verificaNomeVazio(nome);
-		Verificador.verificaRestricaoNull(restricao);
-		Verificador.verificaRestricaoVazia(restricao);
+		Verificador.verificaNull(nome);
+		Verificador.verificaVazio(nome);
+		Verificador.verificaNull(restricao);
 		if (existeGrupo(nome)) {
 			return false;
 		}
@@ -95,10 +94,10 @@ public class Controlador {
 	 * @return Se o aluno foi alocado ou não.
 	 */
 	public String alocarAluno(String matricula, String nome) {
-		Verificador.verificaMatriculaNull(matricula);
-		Verificador.verificaMatriculaVazio(matricula);
-		Verificador.verificaNomeNull(nome);
-		Verificador.verificaNomeVazio(nome);
+		Verificador.verificaNull(matricula);
+		Verificador.verificaVazio(matricula);
+		Verificador.verificaNull(nome);
+		Verificador.verificaVazio(nome);
 		if (!existeAluno(matricula)) {
 			return "Aluno não cadastrado.";
 		}
@@ -109,7 +108,7 @@ public class Controlador {
 		
 		Aluno aluno = this.alunos.get(matricula);
 		Grupo grupo = getGrupo(nome.toUpperCase());
-		if (aluno.getCurso().equals(grupo.getRestricao()) || grupo.getRestricao().equals("")) {
+		if (aluno.getCurso().equals(grupo.getRestricao()) || grupo.getRestricao().equals("") || grupo.getRestricao().equals(" ")) {
 			grupo.adicionaAluno(aluno);
 		}
 		else {
@@ -125,10 +124,10 @@ public class Controlador {
 	 * @return Se o aluno pertence ou não.
 	 */
 	public String pertinenciaGrupo(String nome, String matricula) {
-		Verificador.verificaNomeNull(nome);
-		Verificador.verificaNomeVazio(nome);
-		Verificador.verificaMatriculaNull(matricula);
-		Verificador.verificaMatriculaVazio(matricula);
+		Verificador.verificaNull(nome);
+		Verificador.verificaVazio(nome);
+		Verificador.verificaNull(matricula);
+		Verificador.verificaVazio(matricula);
 		if (!existeGrupo(nome)) {
 			return "Grupo não cadastrado.";
 		}
@@ -149,8 +148,8 @@ public class Controlador {
 	 * @return m valor booleano se foi possível cadastrá-lo ou não.
 	 */
 	public boolean cadastraAlunoRespondeQuadro(String matricula) {
-		Verificador.verificaMatriculaNull(matricula);
-		Verificador.verificaMatriculaVazio(matricula);
+		Verificador.verificaNull(matricula);
+		Verificador.verificaVazio(matricula);
 		if (!existeAluno(matricula)) {
 			return false;
 		}
@@ -178,8 +177,8 @@ public class Controlador {
 	 * @return A quantidade de grupos que possuem restrição por curso.
 	 */
 	public int contagemRestricaoGrupo(String curso) {
-		Verificador.verificaCursoNull(curso);
-		Verificador.verificaCursoVazio(curso);
+		Verificador.verificaNull(curso);
+		Verificador.verificaVazio(curso);
 		int contador = 0;
 		for (Grupo grupo: this.grupos.values()) {
 			if (grupo.getRestricao().equals(curso)) {
@@ -204,7 +203,7 @@ public class Controlador {
 	}
 	
 	/**
-	 * Método qu verifica se o aluno já existe ou não.
+	 * Método que verifica se o aluno já existe ou não.
 	 * @param matricula Matrícula do aluno.
 	 * @return Valor booleano se existe ou não.
 	 */
