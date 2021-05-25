@@ -1,0 +1,3 @@
+Para que seja possível a personalização de dominós a serem usados no jogo, será necessário criar uma interface chamada GeradorDePecas e dentro dela o método buildPecas que retornará uma linkedList de Peça. Assim, Jogo terá como parâmetro a interface GeradorDePecas(que irá dizer como as peças vão ser criadas).
+Com isso, como diferentes tipos de jogos podem ter diferentes tipos de peça, teria uma classe abstrata Peça, para que os tipos de peça só extendessem a ela.
+Dessa forma, a interface poderá ser implementada por várias classes que serão os tipos de jogos(Emojinó, por exemplo). Nesse sentido, cada tipo de jogo retornará as peças dele.
